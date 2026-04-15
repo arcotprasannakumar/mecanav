@@ -1,0 +1,174 @@
+/* animation light controlling*/
+.sidebar {
+    width: 300px;
+    background-color: #222;
+    padding: 30px 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+
+  .sidebar h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .toggle-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+
+  .toggle-group label {
+    font-size: 16px;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4b5563;
+    transition: 0.4s;
+    border-radius: 24px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+
+  input:checked + .slider {
+    background-color: #3b82f6;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #111; */
+    /* padding: 20px; */
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+
+
+  }
+
+  .control-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .control-btn {
+    padding: 10px 20px;
+    font-size: 15px;
+    border: none;
+    border-radius: 23px;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .on-btn {
+    background: linear-gradient(to right, #3b82f6, #60a5fa);
+  }
+
+  .on-btn:hover {
+    background: linear-gradient(to right, #2563eb, #3b82f6);
+  }
+
+  .off-btn {
+    background: linear-gradient(to right, #6b7280, #9ca3af);
+  }
+
+  .off-btn:hover {
+    background: linear-gradient(to right, #4b5563, #6b7280);
+  }
+
+
+ 
+@media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        box-shadow: none;
+        padding: 20px 15px;
+      }
+
+      .sidebar h1 {
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+
+      .main-content {
+        height: auto;
+        flex: 1;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 10px;
+      }
+
+      .main-content img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .control-buttons {
+        margin-top: 15px;
+        gap: 10px;
+        padding-bottom: 20px;
+      }
+
+      .control-btn {
+        flex: 1 1 48%;
+        font-size: 14px;
+        padding: 10px 12px;
+      }
+
+      .toggle-group {
+        margin-bottom: 12px;
+        padding: 5px 0;
+      }
+    }

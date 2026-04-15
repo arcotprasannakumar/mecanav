@@ -1,0 +1,150 @@
+/* --- General Glass Container --- */
+.mappingpoint-section {
+  background: linear-gradient(135deg, rgba(6, 6, 6, 0.05), rgba(9, 9, 9, 0.1));
+  padding: 3rem 1rem;
+  color: #e0e0e0;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+
+.mappingpoint-text h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(255,255,255,0.3);
+}
+
+.mappingpoint-text p {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Map Container with Glassmorphism --- */
+.mappingpoint-container {
+  position: relative;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 15px;
+  overflow: hidden;
+  background: rgba(9, 9, 9, 0.07);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(5, 5, 5, 0.18);
+}
+
+.mappingpoint-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 15px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --- Dot Styles --- */
+.mappingpoint-dot {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(3, 80, 79, 0.9);
+  box-shadow:
+    0 0 8px 2px rgba(255, 255, 255, 0.8),
+    0 0 15px 4px rgba(255, 255, 255, 0.3);
+  animation: mappingpoint-pulse 2.5s infinite;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Inner white center dot */
+.mappingpoint-inner-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+/* Tooltip style */
+.mappingpoint-dot::after {
+  content: attr(data-country);
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Tooltip arrow */
+.mappingpoint-dot::before {
+  content: '';
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.8) transparent transparent transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show tooltip on hover */
+.mappingpoint-dot:hover::after,
+.mappingpoint-dot:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* --- Dot Positions Desktop --- */
+.mappingpoint-dot1 { top: 56%; left: 69.7%; }
+.mappingpoint-dot2 { top: 35%; left: 45%; }
+.mappingpoint-dot3 { top: 45%; left: 75%; }
+.mappingpoint-dot4 { top: 43%; left: 50.8%; }
+.mappingpoint-dot5 { top: 29%; left: 18%; }
+.mappingpoint-dot6 { top: 52%; left: 63%; }
+.mappingpoint-dot7 { top: 35%; left: 50%; }
+
+/* --- Dot Positions Mobile --- */
+@media (max-width: 768px) {
+  .mappingpoint-dot1 { top: 50%; left: 69%; }
+  .mappingpoint-dot2 { top: 35%; left: 45%; }
+  .mappingpoint-dot3 { top: 40%; left: 72%; }
+  .mappingpoint-dot4 { top: 42%; left: 50%; }
+  .mappingpoint-dot5 { top: 25%; left: 18%; }
+  .mappingpoint-dot6 { top: 49%; left: 61%; }
+  .mappingpoint-dot7 { top: 33%; left: 49%; }
+
+  .mappingpoint-dot {
+    width: 14px;
+    height: 14px;
+  }
+  .mappingpoint-inner-dot {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+/* --- Pulse animation --- */
+@keyframes mappingpoint-pulse {
+  0% { transform: scale(0.85); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 0.3; }
+  100% { transform: scale(0.85); opacity: 0.7; }
+}

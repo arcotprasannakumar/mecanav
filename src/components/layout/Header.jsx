@@ -1,0 +1,220 @@
+import { NavLink } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import navigation from "../../data/navigation";
+
+const productColumns = [
+  [
+    { label: "Pixel LED Strip", to: "/products/category/pixel-led-strip" },
+    { label: "Neon Flex LED", to: "/products/category/neon-flex-led" },
+    { label: "Pixel LED Bars", to: "/products/category/pixel-led-bars" },
+    { label: "Pixel LED Panel", to: "/products/category/pixel-led-panel" },
+  ],
+  [
+    { label: "Pixel Dot Lights", to: "/products/category/pixel-dot-lights" },
+    { label: "Wall Washers Lights", to: "/products/category/wall-washers-lights" },
+    { label: "Pillar Highlighters", to: "/products/category/pillar-highlighters" },
+    { label: "Fan Projection Lights", to: "/products/category/fan-projection-lights" },
+  ],
+  [
+    { label: "Wall Window Lights", to: "/products/category/wall-window-lights" },
+    { label: "Gobo Lights", to: "/products/category/gobo-lights" },
+    { label: "Pool Lights", to: "/products/category/pool-lights" },
+    { label: "Fountain Lights", to: "/products/category/fountain-lights" },
+  ],
+  [
+    { label: "Recessed Ground Lights", to: "/products/category/recessed-ground-lights" },
+    { label: "Tree Highlighters", to: "/products/category/tree-highlighters" },
+    { label: "Flood Lights", to: "/products/category/flood-lights" },
+    { label: "DMX Controllers", to: "/products/category/dmx-controllers" },
+    { label: "Drivers", to: "/products/category/drivers" },
+  ],
+];
+
+const services = [
+  { label: "Catalogues", to: "/catalogues" },
+  { label: "Downloads", to: "/downloads" },
+  { label: "Solutions", to: "/solutions" },
+  { label: "Projects", to: "/projects" },
+];
+
+function Header({ pathname, onMenuToggle }) {
+  const [isStuck, setIsStuck] = useState(false);
+  const [spotlightLeft, setSpotlightLeft] = useState(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsStuck(window.scrollY > 80);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const activeMainPath = useMemo(() => {
+    if (pathname.startsWith("/products")) {
+      return "/products";
+    }
+
+    if (["/catalogues", "/downloads", "/solutions", "/projects"].some((path) => pathname.startsWith(path))) {
+      return "services";
+    }
+
+    return pathname;
+  }, [pathname]);
+
+  const moveSpotlight = (event) => {
+    const navElement = event.currentTarget;
+    const navWrapper = navElement.closest(".main-menu");
+
+    if (!navWrapper) {
+      return;
+    }
+
+    const navRect = navWrapper.getBoundingClientRect();
+    const rect = navElement.getBoundingClientRect();
+    const center = rect.left - navRect.left + rect.width / 2;
+    setSpotlightLeft(center);
+  };
+
+  const restoreActiveSpotlight = () => {
+    const navWrapper = document.querySelector(".main-menu");
+    const active = navWrapper?.querySelector("a[data-nav-active='true']");
+
+    if (!navWrapper || !active) {
+      return;
+    }
+
+    const navRect = navWrapper.getBoundingClientRect();
+    const rect = active.getBoundingClientRect();
+    setSpotlightLeft(rect.left - navRect.left + rect.width / 2);
+  };
+
+  useEffect(() => {
+    const timeout = window.setTimeout(restoreActiveSpotlight, 40);
+    return () => window.clearTimeout(timeout);
+  }, [pathname]);
+
+  return (
+    <header id="header-section" className={`header-section sticky-header clearfix${isStuck ? " stuck" : ""}`}>
+      <div className="container">
+        <div className="row align-items-center">
+          <div className="col-lg-2">
+            <div className="brand-logo">
+              <NavLink to="/">
+                <img src={navigation.brand.logo} alt="mecanavlogo" />
+              </NavLink>
+              <div className="mobile-menu-btns float-right ul-li-right">
+                <ul className="clearfix">
+                  <li>
+                    <button type="button" className="menu-btn" onClick={onMenuToggle} aria-label="Open menu">
+                      <span />
+                      <span />
+                      <span />
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-lg-10">
+            <nav className="main-menu ul-li-right clearfix" onMouseLeave={restoreActiveSpotlight}>
+              {spotlightLeft !== null ? (
+                <div className="spotlight" style={{ left: `${spotlightLeft}px`, opacity: 0.36 }} aria-hidden="true" />
+              ) : null}
+              <ul className="clearfix">
+                <li className="menu-item">
+                  <NavLink
+                    to="/"
+                    className={activeMainPath === "/" ? "active" : ""}
+                    data-nav-active={activeMainPath === "/"}
+                    onMouseEnter={moveSpotlight}
+                  >
+                    HOME
+                  </NavLink>
+                </li>
+
+                <li className="menu-item">
+                  <NavLink
+                    to="/about"
+                    className={activeMainPath === "/about" ? "active" : ""}
+                    data-nav-active={activeMainPath === "/about"}
+                    onMouseEnter={moveSpotlight}
+                  >
+                    ABOUT US
+                  </NavLink>
+                </li>
+
+                <li className="menu-item mega-menu">
+                  <NavLink
+                    to="/products"
+                    className={activeMainPath === "/products" ? "active" : ""}
+                    data-nav-active={activeMainPath === "/products"}
+                    onMouseEnter={moveSpotlight}
+                  >
+                    PRODUCTS <span className="dropdown-icon" />
+                  </NavLink>
+                  <div className="mega-menu-wrapper">
+                    <div className="mega-menu-grid">
+                      {productColumns.map((column) => (
+                        <div className="menu-group" key={column[0].label}>
+                          {column.map((item) => (
+                            <NavLink key={item.label} to={item.to}>
+                              {item.label}
+                            </NavLink>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </li>
+
+                <li className="menu-item">
+                  <NavLink
+                    to="/applications"
+                    className={activeMainPath === "/applications" ? "active" : ""}
+                    data-nav-active={activeMainPath === "/applications"}
+                    onMouseEnter={moveSpotlight}
+                  >
+                    APPLICATIONS
+                  </NavLink>
+                </li>
+
+                <li className="menu-item-has-child">
+                  <span
+                    className={activeMainPath === "services" ? "active" : ""}
+                    data-nav-active={activeMainPath === "services"}
+                    onMouseEnter={moveSpotlight}
+                  >
+                    SERVICES
+                  </span>
+                  <ul className="submenu">
+                    {services.map((item) => (
+                      <li key={item.label}>
+                        <NavLink to={item.to}>{item.label}</NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+
+                <li className="menu-item">
+                  <NavLink
+                    to="/contact"
+                    className={activeMainPath === "/contact" ? "active" : ""}
+                    data-nav-active={activeMainPath === "/contact"}
+                    onMouseEnter={moveSpotlight}
+                  >
+                    CONTACT US
+                  </NavLink>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export default Header;
