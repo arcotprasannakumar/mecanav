@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 
 function CatalogueCard({ title, image, to, onDownload }) {
   return (
-    <article className="group relative overflow-hidden shadow-[0_6px_18px_rgba(0,0,0,0.06)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
+    <article className="group relative overflow-hidden rounded-[20px] border border-black/10 bg-white shadow-[0_6px_18px_rgba(0,0,0,0.06)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)]">
       <div className="overflow-hidden">
         <img
           src={image}
           alt={title}
           loading="lazy"
           decoding="async"
-          className="block h-full w-full object-cover transition duration-300 group-hover:scale-105"
+          className="block h-[320px] w-full object-cover transition duration-300 group-hover:scale-105"
         />
       </div>
 
@@ -29,6 +29,10 @@ function CatalogueCard({ title, image, to, onDownload }) {
         >
           <span aria-hidden="true">↓</span>
         </button>
+      </div>
+
+      <div className="border-t border-black/10 px-4 py-3">
+        <h3 className="line-clamp-2 text-sm font-medium tracking-[0.02em] text-[#1f1f1f]">{title}</h3>
       </div>
     </article>
   );

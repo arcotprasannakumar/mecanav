@@ -28,7 +28,7 @@ function CataloguesPage() {
   };
 
   return (
-    <section className="bg-[#d7d4d4] px-4 py-10 text-black sm:px-6 lg:px-8">
+    <section className="bg-[#d7d4d4] px-4 py-12 text-black sm:px-6 lg:px-8">
       <PageMeta
         title="Catalogues"
         description="Preview and download Mecanav product catalogues through the migrated React catalogue hub."
@@ -40,7 +40,7 @@ function CataloguesPage() {
           </h1>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {catalogues.map((catalogue) => (
             <CatalogueCard
               key={catalogue.slug}

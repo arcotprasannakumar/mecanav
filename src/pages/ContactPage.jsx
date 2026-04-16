@@ -58,7 +58,7 @@ function ContactPage() {
         overlayClassName="bg-black/65"
       />
 
-      <section id="contact" className="px-4 py-14 sm:px-6 lg:px-8">
+      <section id="contact" className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-[1280px] gap-8 lg:grid-cols-2">
           <div className="rounded-[12px] bg-[#1c1c1c] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
             <h2 className="text-3xl font-semibold text-white">Get in Touch</h2>
@@ -142,7 +142,7 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="px-4 py-14 sm:px-6 lg:px-8">
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1280px]">
           <div className="text-center">
             <h2 className="text-3xl font-semibold text-white">Search Your Nearest Location</h2>

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import navigation from "../../data/navigation";
 
 const productColumns = [
@@ -38,12 +38,18 @@ const services = [
 ];
 
 function Header({ pathname, onMenuToggle }) {
+  const navRef = useRef(null);
   const [isStuck, setIsStuck] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
   const [spotlightLeft, setSpotlightLeft] = useState(null);
+  const isSolidHeaderPage =
+    pathname.startsWith("/products") || pathname.startsWith("/product");
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsStuck(window.scrollY > 80);
+      const scrollY = window.scrollY;
+      setIsAtTop(scrollY < 4);
+      setIsStuck(scrollY > 8);
     };
 
     handleScroll();
@@ -65,40 +71,48 @@ function Header({ pathname, onMenuToggle }) {
 
   const moveSpotlight = (event) => {
     const navElement = event.currentTarget;
-    const navWrapper = navElement.closest(".main-menu");
+    const navList = navRef.current?.querySelector("ul");
 
-    if (!navWrapper) {
+    if (!navList) {
       return;
     }
 
-    const navRect = navWrapper.getBoundingClientRect();
+    const navRect = navList.getBoundingClientRect();
     const rect = navElement.getBoundingClientRect();
     const center = rect.left - navRect.left + rect.width / 2;
     setSpotlightLeft(center);
   };
 
   const restoreActiveSpotlight = () => {
-    const navWrapper = document.querySelector(".main-menu");
-    const active = navWrapper?.querySelector("a[data-nav-active='true']");
+    const navList = navRef.current?.querySelector("ul");
+    const active = navList?.querySelector("[data-nav-active='true']");
 
-    if (!navWrapper || !active) {
+    if (!navList || !active) {
       return;
     }
 
-    const navRect = navWrapper.getBoundingClientRect();
+    const navRect = navList.getBoundingClientRect();
     const rect = active.getBoundingClientRect();
     setSpotlightLeft(rect.left - navRect.left + rect.width / 2);
   };
 
   useEffect(() => {
     const timeout = window.setTimeout(restoreActiveSpotlight, 40);
-    return () => window.clearTimeout(timeout);
+    const onResize = () => restoreActiveSpotlight();
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => {
+      window.clearTimeout(timeout);
+      window.removeEventListener("resize", onResize);
+    };
   }, [pathname]);
 
   return (
-    <header id="header-section" className={`header-section sticky-header clearfix${isStuck ? " stuck" : ""}`}>
+    <header
+      id="header-section"
+      className={`header-section sticky-header clearfix${isAtTop ? " at-top" : ""}${isStuck ? " stuck" : ""}${isSolidHeaderPage ? " solid-header" : ""}`}
+    >
       <div className="container">
-        <div className="row align-items-center">
+        <div className="row align-items-center header-layout">
           <div className="col-lg-2">
             <div className="brand-logo">
               <NavLink to="/">
@@ -118,10 +132,14 @@ function Header({ pathname, onMenuToggle }) {
             </div>
           </div>
 
-          <div className="col-lg-10">
-            <nav className="main-menu ul-li-right clearfix" onMouseLeave={restoreActiveSpotlight}>
+          <div className="col-lg-10 header-nav-wrap">
+            <nav ref={navRef} className="main-menu ul-li-right clearfix" onMouseLeave={restoreActiveSpotlight}>
               {spotlightLeft !== null ? (
-                <div className="spotlight" style={{ left: `${spotlightLeft}px`, opacity: 0.36 }} aria-hidden="true" />
+                <div
+                  className="spotlight"
+                  style={{ left: `${spotlightLeft}px`, opacity: 1 }}
+                  aria-hidden="true"
+                />
               ) : null}
               <ul className="clearfix">
                 <li className="menu-item">
@@ -130,6 +148,7 @@ function Header({ pathname, onMenuToggle }) {
                     className={activeMainPath === "/" ? "active" : ""}
                     data-nav-active={activeMainPath === "/"}
                     onMouseEnter={moveSpotlight}
+                    onFocus={moveSpotlight}
                   >
                     HOME
                   </NavLink>
@@ -141,6 +160,7 @@ function Header({ pathname, onMenuToggle }) {
                     className={activeMainPath === "/about" ? "active" : ""}
                     data-nav-active={activeMainPath === "/about"}
                     onMouseEnter={moveSpotlight}
+                    onFocus={moveSpotlight}
                   >
                     ABOUT US
                   </NavLink>
@@ -152,6 +172,7 @@ function Header({ pathname, onMenuToggle }) {
                     className={activeMainPath === "/products" ? "active" : ""}
                     data-nav-active={activeMainPath === "/products"}
                     onMouseEnter={moveSpotlight}
+                    onFocus={moveSpotlight}
                   >
                     PRODUCTS <span className="dropdown-icon" />
                   </NavLink>
@@ -176,19 +197,23 @@ function Header({ pathname, onMenuToggle }) {
                     className={activeMainPath === "/applications" ? "active" : ""}
                     data-nav-active={activeMainPath === "/applications"}
                     onMouseEnter={moveSpotlight}
+                    onFocus={moveSpotlight}
                   >
                     APPLICATIONS
                   </NavLink>
                 </li>
 
                 <li className="menu-item-has-child">
-                  <span
-                    className={activeMainPath === "services" ? "active" : ""}
+                  <button
+                    type="button"
+                    className={activeMainPath === "services" ? "active menu-trigger" : "menu-trigger"}
                     data-nav-active={activeMainPath === "services"}
                     onMouseEnter={moveSpotlight}
+                    onFocus={moveSpotlight}
+                    aria-haspopup="menu"
                   >
-                    SERVICES
-                  </span>
+                    SERVICES <span className="dropdown-icon" />
+                  </button>
                   <ul className="submenu">
                     {services.map((item) => (
                       <li key={item.label}>
@@ -204,6 +229,7 @@ function Header({ pathname, onMenuToggle }) {
                     className={activeMainPath === "/contact" ? "active" : ""}
                     data-nav-active={activeMainPath === "/contact"}
                     onMouseEnter={moveSpotlight}
+                    onFocus={moveSpotlight}
                   >
                     CONTACT US
                   </NavLink>

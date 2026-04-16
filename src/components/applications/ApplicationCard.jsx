@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+ 
 function ApplicationCard({ title, image, to, className = "" }) {
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -22,5 +22,6 @@ function ApplicationCard({ title, image, to, className = "" }) {
     </div>
   );
 }
-
+ 
 export default ApplicationCard;
+ 

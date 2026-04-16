@@ -39,7 +39,7 @@ function ProductCategoryPage() {
           activeCategorySlug={category.slug}
           productCounts={productCounts}
         />
-        <main className="flex-1 bg-[#fffafa] p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 bg-[#fffafa] p-4 sm:p-6 lg:p-10">
           <div className="rounded-[26px] border border-black/10 bg-white p-5 sm:p-8">
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-center">
               <div>
@@ -71,7 +71,7 @@ function ProductCategoryPage() {
           </div>
 
           {categoryProducts.length ? (
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
               {categoryProducts.map((product) => (
                 <ProductCard
                   key={product.slug}

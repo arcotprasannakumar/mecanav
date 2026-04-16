@@ -50,7 +50,7 @@ function CatalogueDetailPage() {
         title={catalogue.title}
         description={catalogue.summary}
       />
-      <div className="mx-auto max-w-[1280px] px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8 flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
           <Link to="/catalogues" className="hover:text-white">
             Catalogues
@@ -59,7 +59,7 @@ function CatalogueDetailPage() {
           <span className="text-white/75">{catalogue.title}</span>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
           <div>
             <CataloguePreview flipbookUrl={catalogue.flipbookUrl} title={catalogue.title} />
           </div>

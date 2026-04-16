@@ -11,7 +11,7 @@ function ProductSidebar({ categories, activeCategorySlug, productCounts = {} }) 
   };
 
   return (
-    <aside className="w-full border-b border-black/10 bg-[#030303] p-4 lg:min-h-full lg:w-[280px] lg:flex-none lg:border-b-0 lg:border-r lg:border-r-black/10 lg:p-6">
+    <aside className="w-full border-b border-black/10 bg-[#030303] p-4 lg:min-h-full lg:w-[290px] lg:flex-none lg:border-b-0 lg:border-r lg:border-r-black/10 lg:p-6">
       <button
         type="button"
         className="flex w-full items-center justify-center rounded-md bg-black px-4 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white lg:hidden"
@@ -31,7 +31,7 @@ function ProductSidebar({ categories, activeCategorySlug, productCounts = {} }) 
             <div key={category.slug}>
               <button
                 type="button"
-                className={`flex w-full items-center justify-between rounded-md px-4 py-3 text-left text-sm font-bold uppercase tracking-[0.16em] text-white transition ${
+                className={`flex w-full items-center justify-between rounded-md px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.14em] text-white transition sm:text-sm ${
                   activeCategorySlug === category.slug ? "bg-white/10" : "bg-black hover:scale-[1.02]"
                 }`}
                 onClick={() => toggleCategory(category.slug)}
@@ -47,7 +47,7 @@ function ProductSidebar({ categories, activeCategorySlug, productCounts = {} }) 
               >
                 <Link
                   to={`/products/category/${category.slug}`}
-                  className="flex items-center gap-2 py-2 text-[12px] font-light tracking-[0.02em] text-white transition hover:translate-x-1 hover:text-[#00ffe5]"
+                  className="flex items-center gap-2 py-2 text-[11px] font-light tracking-[0.03em] text-white transition hover:translate-x-1 hover:text-[#00ffe5]"
                 >
                   <span className="text-[10px]">▶</span>
                   Browse category
@@ -57,7 +57,7 @@ function ProductSidebar({ categories, activeCategorySlug, productCounts = {} }) 
                   <Link
                     key={item.slug}
                     to={item.to}
-                    className="flex items-center gap-2 py-2 text-[12px] font-light tracking-[0.02em] text-white transition hover:translate-x-1 hover:text-[#00ffe5]"
+                    className="flex items-center gap-2 py-2 text-[11px] font-light tracking-[0.03em] text-white transition hover:translate-x-1 hover:text-[#00ffe5]"
                   >
                     <span className="text-[10px]">▶</span>
                     {item.label}

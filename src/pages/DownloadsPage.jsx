@@ -26,9 +26,9 @@ function DownloadsPage() {
         title="Downloads"
         description="Browse legacy Mecanav download references and document availability states."
       />
-      <section className="px-4 py-14 sm:px-6 lg:px-8">
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1280px]">
-          <h1 className="text-center text-4xl font-bold text-gray-800">Downloads</h1>
+          <h1 className="text-center text-4xl font-semibold text-gray-800 sm:text-5xl">Downloads</h1>
 
           {notice ? (
             <StatusPanel tone="warning" message={notice} className="mx-auto mt-6 max-w-3xl shadow-none" />

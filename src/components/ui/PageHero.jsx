@@ -1,7 +1,7 @@
 function PageHero({ title, breadcrumbs = [], backgroundImage, overlayClassName = "bg-black/70" }) {
   return (
     <section
-      className="relative overflow-hidden px-4 py-20 text-center sm:px-6 lg:px-8"
+      className="relative overflow-hidden px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8 lg:py-32"
       style={
         backgroundImage
           ? {
@@ -14,11 +14,11 @@ function PageHero({ title, breadcrumbs = [], backgroundImage, overlayClassName =
     >
       {backgroundImage ? <div className={`absolute inset-0 ${overlayClassName}`} /> : null}
       <div className="relative mx-auto max-w-5xl">
-        <h1 className="text-4xl font-semibold text-white sm:text-5xl">{title}</h1>
+        <h1 className="text-4xl font-semibold text-white sm:text-5xl lg:text-6xl">{title}</h1>
         {breadcrumbs.length ? (
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-white/75">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs uppercase tracking-[0.2em] text-white/75 sm:text-sm">
             {breadcrumbs.map((item, index) => (
-              <div key={`${item.label}-${index}`} className="flex items-center gap-4">
+              <div key={`${item.label}-${index}`} className="flex items-center gap-3">
                 {index > 0 ? <span>›</span> : null}
                 <span>{item.label}</span>
               </div>

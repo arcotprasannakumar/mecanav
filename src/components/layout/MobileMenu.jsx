@@ -61,7 +61,14 @@ function MobileMenu({ isOpen, onClose }) {
             </li>
 
             <li className={`menu-item-has-child${openProducts ? " open" : ""}`}>
-              <button type="button" onClick={() => setOpenProducts((current) => !current)}>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpenProducts((current) => !current);
+                  setOpenServices(false);
+                }}
+                aria-expanded={openProducts}
+              >
                 PRODUCTS <span className="dropdown-icon" />
               </button>
               <ul className="submenu">
@@ -78,7 +85,14 @@ function MobileMenu({ isOpen, onClose }) {
             </li>
 
             <li className={`menu-item-has-child${openServices ? " open" : ""}`}>
-              <button type="button" onClick={() => setOpenServices((current) => !current)}>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpenServices((current) => !current);
+                  setOpenProducts(false);
+                }}
+                aria-expanded={openServices}
+              >
                 SERVICES <span className="dropdown-icon" />
               </button>
               <ul className="submenu">
