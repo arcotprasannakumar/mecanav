@@ -1,5 +1,6 @@
 import projectBackground from "../assets/images/applications/Bridge-lighting-homepage-final.webp";
 import ComingSoonHero from "../components/info/ComingSoonHero";
+import HomeLegacyPartnersSection from "../components/sections/home/HomeLegacyPartnersSection";
 import PageMeta from "../components/ui/PageMeta";
 
 function ProjectsPage() {
@@ -7,13 +8,14 @@ function ProjectsPage() {
     <>
       <PageMeta
         title="Projects"
-        description="Mecanav projects page. The migrated React route is live and the original page content remains a coming soon state."
+        description="Mecanav project showcase coming soon."
       />
       <ComingSoonHero
         backgroundImage={projectBackground}
         title="Coming Soon..."
         subtitle="We're working on something awesome."
       />
+      <HomeLegacyPartnersSection />
     </>
   );
 }

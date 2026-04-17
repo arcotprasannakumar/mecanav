@@ -2,48 +2,16 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
 import navigation from "../../data/navigation";
 
-const productColumns = [
-  [
-    { label: "Pixel LED Strip", to: "/products/category/pixel-led-strip" },
-    { label: "Neon Flex LED", to: "/products/category/neon-flex-led" },
-    { label: "Pixel LED Bars", to: "/products/category/pixel-led-bars" },
-    { label: "Pixel LED Panel", to: "/products/category/pixel-led-panel" },
-  ],
-  [
-    { label: "Pixel Dot Lights", to: "/products/category/pixel-dot-lights" },
-    { label: "Wall Washers Lights", to: "/products/category/wall-washers-lights" },
-    { label: "Pillar Highlighters", to: "/products/category/pillar-highlighters" },
-    { label: "Fan Projection Lights", to: "/products/category/fan-projection-lights" },
-  ],
-  [
-    { label: "Wall Window Lights", to: "/products/category/wall-window-lights" },
-    { label: "Gobo Lights", to: "/products/category/gobo-lights" },
-    { label: "Pool Lights", to: "/products/category/pool-lights" },
-    { label: "Fountain Lights", to: "/products/category/fountain-lights" },
-  ],
-  [
-    { label: "Recessed Ground Lights", to: "/products/category/recessed-ground-lights" },
-    { label: "Tree Highlighters", to: "/products/category/tree-highlighters" },
-    { label: "Flood Lights", to: "/products/category/flood-lights" },
-    { label: "DMX Controllers", to: "/products/category/dmx-controllers" },
-    { label: "Drivers", to: "/products/category/drivers" },
-  ],
-];
-
-const services = [
-  { label: "Catalogues", to: "/catalogues" },
-  { label: "Downloads", to: "/downloads" },
-  { label: "Solutions", to: "/solutions" },
-  { label: "Projects", to: "/projects" },
-];
+const productColumns = navigation.header.find((item) => item.variant === "mega")?.columns ?? [];
+const services = navigation.header.find((item) => item.variant === "dropdown")?.children ?? [];
 
 function Header({ pathname, onMenuToggle }) {
+  const headerRef = useRef(null);
   const navRef = useRef(null);
   const [isStuck, setIsStuck] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
   const [spotlightLeft, setSpotlightLeft] = useState(null);
-  const isSolidHeaderPage =
-    pathname.startsWith("/products") || pathname.startsWith("/product");
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,29 +39,38 @@ function Header({ pathname, onMenuToggle }) {
 
   const moveSpotlight = (event) => {
     const navElement = event.currentTarget;
-    const navList = navRef.current?.querySelector("ul");
+    const headerElement = headerRef.current;
 
-    if (!navList) {
+    if (!headerElement) {
       return;
     }
 
-    const navRect = navList.getBoundingClientRect();
+    const headerRect = headerElement.getBoundingClientRect();
     const rect = navElement.getBoundingClientRect();
-    const center = rect.left - navRect.left + rect.width / 2;
+    const center = rect.left - headerRect.left + rect.width / 2;
     setSpotlightLeft(center);
+  };
+
+  const closeDesktopMenus = () => {
+    const focusedElement = navRef.current?.querySelector(":focus");
+
+    if (focusedElement instanceof HTMLElement) {
+      focusedElement.blur();
+    }
   };
 
   const restoreActiveSpotlight = () => {
     const navList = navRef.current?.querySelector("ul");
+    const headerElement = headerRef.current;
     const active = navList?.querySelector("[data-nav-active='true']");
 
-    if (!navList || !active) {
+    if (!headerElement || !active) {
       return;
     }
 
-    const navRect = navList.getBoundingClientRect();
+    const headerRect = headerElement.getBoundingClientRect();
     const rect = active.getBoundingClientRect();
-    setSpotlightLeft(rect.left - navRect.left + rect.width / 2);
+    setSpotlightLeft(rect.left - headerRect.left + rect.width / 2);
   };
 
   useEffect(() => {
@@ -106,11 +83,23 @@ function Header({ pathname, onMenuToggle }) {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    closeDesktopMenus();
+  }, [pathname]);
+
   return (
     <header
       id="header-section"
-      className={`header-section sticky-header clearfix${isAtTop ? " at-top" : ""}${isStuck ? " stuck" : ""}${isSolidHeaderPage ? " solid-header" : ""}`}
+      ref={headerRef}
+      className={`header-section sticky-header clearfix${isAtTop ? " at-top" : ""}${isStuck ? " stuck" : ""}${isHomePage ? "" : " solid-header"}`}
     >
+      {spotlightLeft !== null ? (
+        <div
+          className="spotlight"
+          style={{ left: `${spotlightLeft}px`, opacity: 1 }}
+          aria-hidden="true"
+        />
+      ) : null}
       <div className="container">
         <div className="row align-items-center header-layout">
           <div className="col-lg-2">
@@ -134,13 +123,6 @@ function Header({ pathname, onMenuToggle }) {
 
           <div className="col-lg-10 header-nav-wrap">
             <nav ref={navRef} className="main-menu ul-li-right clearfix" onMouseLeave={restoreActiveSpotlight}>
-              {spotlightLeft !== null ? (
-                <div
-                  className="spotlight"
-                  style={{ left: `${spotlightLeft}px`, opacity: 1 }}
-                  aria-hidden="true"
-                />
-              ) : null}
               <ul className="clearfix">
                 <li className="menu-item">
                   <NavLink
@@ -173,6 +155,7 @@ function Header({ pathname, onMenuToggle }) {
                     data-nav-active={activeMainPath === "/products"}
                     onMouseEnter={moveSpotlight}
                     onFocus={moveSpotlight}
+                    onClick={closeDesktopMenus}
                   >
                     PRODUCTS <span className="dropdown-icon" />
                   </NavLink>
@@ -181,7 +164,7 @@ function Header({ pathname, onMenuToggle }) {
                       {productColumns.map((column) => (
                         <div className="menu-group" key={column[0].label}>
                           {column.map((item) => (
-                            <NavLink key={item.label} to={item.to}>
+                            <NavLink key={item.label} to={item.to} onClick={closeDesktopMenus}>
                               {item.label}
                             </NavLink>
                           ))}
@@ -217,7 +200,7 @@ function Header({ pathname, onMenuToggle }) {
                   <ul className="submenu">
                     {services.map((item) => (
                       <li key={item.label}>
-                        <NavLink to={item.to}>{item.label}</NavLink>
+                        <NavLink to={item.to} onClick={closeDesktopMenus}>{item.label}</NavLink>
                       </li>
                     ))}
                   </ul>

@@ -3,6 +3,8 @@ import navigation from "../../data/navigation";
 
 function Footer() {
   const { footer } = navigation;
+  const firstSocialRow = footer.social.slice(0, 6);
+  const secondSocialRow = footer.social.slice(6);
 
   return (
     <footer id="footer-section" className="footer-section sec-ptb-10 clearfix" style={{ backgroundColor: "rgb(30, 32, 35)" }}>
@@ -80,12 +82,26 @@ function Footer() {
           <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 footer-social-col">
             <div className="useful-links ul-li-block clearfix footer-social-block">
               <h5>Social Media</h5>
-              <ul className="clearfix social-media-list social-media-grid">
-                {footer.social.map((item) => (
-                  <li key={item.label}>
-                    <a href={item.href ?? "#"} target={item.href ? "_blank" : undefined} rel={item.href ? "noreferrer" : undefined}>
-                      <img src={item.icon} alt={item.label} style={{ width: "30px", height: "30px" }} loading="lazy" />
-                    </a>
+              <ul className="clearfix social-media-list">
+                {[firstSocialRow, secondSocialRow].map((row, rowIndex) => (
+                  <li key={rowIndex === 0 ? "social-row-primary" : "social-row-secondary"}>
+                    {row.map((item) => (
+                      item.href ? (
+                        <a
+                          key={item.label}
+                          href={item.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={item.label}
+                        >
+                          <img src={item.icon} alt={item.label} loading="lazy" />
+                        </a>
+                      ) : (
+                        <span key={item.label} className="social-link-unavailable" aria-label={`${item.label} unavailable`}>
+                          <img src={item.icon} alt={item.label} loading="lazy" />
+                        </span>
+                      )
+                    ))}
                   </li>
                 ))}
               </ul>

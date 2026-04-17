@@ -4,6 +4,7 @@ import locations from "../data/locations";
 import ContactInfoCard from "../components/contact/ContactInfoCard";
 import ContactForm from "../components/contact/ContactForm";
 import LocationCard from "../components/contact/LocationCard";
+import HomeLegacyPartnersSection from "../components/sections/home/HomeLegacyPartnersSection";
 import PageMeta from "../components/ui/PageMeta";
 import PageHero from "../components/ui/PageHero";
 import StatusPanel from "../components/ui/StatusPanel";
@@ -78,7 +79,7 @@ function ContactPage() {
                 text={contactEmail}
                 href={`mailto:${contactEmail}`}
                 icon="@"
-                subtle="Legacy React migration note: the original page used this email and a Google Form, not an app-owned mail backend."
+                subtle="For project inquiries, catalogues, product details, and technical support."
               />
             </div>
 
@@ -190,7 +191,7 @@ function ContactPage() {
                 ) : (
                   <StatusPanel
                     tone="light"
-                    message="No matching legacy location card was found for this search. The original API-key-based map filter was broken, so this React version keeps the search experience safe and card-based."
+                    message="No matching location was found for this search. Try another city, country, or contact the Mecanav team for support."
                     className="rounded-2xl px-5 py-6 shadow-none"
                   />
                 )}
@@ -213,6 +214,7 @@ function ContactPage() {
           </div>
         </div>
       </section>
+      <HomeLegacyPartnersSection />
     </section>
   );
 }

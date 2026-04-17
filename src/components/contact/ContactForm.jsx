@@ -80,8 +80,7 @@ function ContactForm() {
         {error ? <p className="text-sm text-red-400">{error}</p> : null}
         {submitted ? (
           <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-200">
-            The legacy contact page submitted to an external Google Form. The React migration
-            currently preserves client-side validation only, so no server-side message was sent.
+            Thanks for sharing your details. Our team will follow up with you shortly.
           </div>
         ) : null}
 

@@ -72,7 +72,7 @@ function CatalogueFormGate({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-md rounded-[10px] bg-white p-6"
+        className="relative max-h-[calc(100vh-32px)] w-full max-w-md overflow-y-auto rounded-[10px] bg-white p-6"
         onClick={(event) => event.stopPropagation()}
       >
         <button

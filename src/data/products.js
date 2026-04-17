@@ -27,6 +27,7 @@ import strip17 from "../assets/images/Final-Products/Product spec imgs/pixel led
 import strip18 from "../assets/images/Final-Products/Product spec imgs/pixel led strip/Pixel-led-strip (18).webp";
 import strip19 from "../assets/images/Final-Products/Product spec imgs/pixel led strip/Pixel-led-strip (19).webp";
 import strip20 from "../assets/images/Final-Products/Product spec imgs/pixel led strip/Pixel-led-strip (20).webp";
+import pixelLedStripPdf from "../assets/pdfs/PIXEL-LED-STRIP-WEBSITE.pdf";
 
 const sharedGallery = [
   strip5,
@@ -45,6 +46,10 @@ const sharedGallery = [
   strip18,
   strip19,
   strip20,
+];
+
+const pixelStripDocuments = [
+  { label: "Pixel LED Strip Catalogue", href: pixelLedStripPdf, type: "PDF" },
 ];
 
 const baseSpecs = [
@@ -101,7 +106,7 @@ const products = [
     }),
     productCodes: [],
     applications: ["Cove lighting", "Under-cabinet lighting", "Architectural accents"],
-    documents: [],
+    documents: pixelStripDocuments,
     cta: { label: "Explore Features", href: "#product-tabs" },
     legacySource: "ww-12v-non-pixel-led-strip.html",
     migrationStatus: "full",
@@ -131,10 +136,7 @@ const products = [
     }),
     productCodes: [],
     applications: ["Hotels", "Large retail spaces", "High-end residential projects"],
-    documents: [
-      { label: "Datasheet PDF", href: null, status: "legacy-missing" },
-      { label: "Installation Guide", href: null, status: "legacy-missing" },
-    ],
+    documents: pixelStripDocuments,
     cta: { label: "Explore Features", href: "#product-tabs" },
     legacySource: "ww-24v-pixel-led-strip.html",
     migrationStatus: "full",
@@ -164,10 +166,7 @@ const products = [
     }),
     productCodes: [],
     applications: ["Stage designs", "Clubs", "Building outlines"],
-    documents: [
-      { label: "Datasheet PDF", href: null, status: "legacy-missing" },
-      { label: "Installation Guide", href: null, status: "legacy-missing" },
-    ],
+    documents: pixelStripDocuments,
     cta: { label: "Explore Features", href: "#product-tabs" },
     legacySource: "rgb-24v-pixel-led-strip.html",
     migrationStatus: "full",
@@ -197,10 +196,7 @@ const products = [
     }),
     productCodes: [],
     applications: ["Restaurants", "Theaters", "Multipurpose interiors"],
-    documents: [
-      { label: "Datasheet PDF", href: null, status: "legacy-missing" },
-      { label: "Installation Guide", href: null, status: "legacy-missing" },
-    ],
+    documents: pixelStripDocuments,
     cta: { label: "Explore Features", href: "#product-tabs" },
     legacySource: "rgbw-24v-non-pixel-led-strip.html",
     migrationStatus: "full",
@@ -230,10 +226,7 @@ const products = [
     }),
     productCodes: [],
     applications: ["Advanced residential", "Hospitality applications", "Smart lighting systems"],
-    documents: [
-      { label: "Datasheet PDF", href: null, status: "legacy-missing" },
-      { label: "Installation Guide", href: null, status: "legacy-missing" },
-    ],
+    documents: pixelStripDocuments,
     cta: { label: "Explore Features", href: "#product-tabs" },
     legacySource: "rgbww-24v-pixel-led-strip.html",
     migrationStatus: "full",

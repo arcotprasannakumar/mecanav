@@ -1,32 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import navigation from "../../data/navigation";
 
-const products = [
-  { label: "Pixel LED Strip", to: "/products/category/pixel-led-strip" },
-  { label: "Neon flex LED", to: "/products/category/neon-flex-led" },
-  { label: "Pixel LED bars", to: "/products/category/pixel-led-bars" },
-  { label: "Pixel LED panel", to: "/products/category/pixel-led-panel" },
-  { label: "Pixel dot lights", to: "/products/category/pixel-dot-lights" },
-  { label: "Wall Washers lights", to: "/products/category/wall-washers-lights" },
-  { label: "Pillar highlighters", to: "/products/category/pillar-highlighters" },
-  { label: "Fan Projection Lights", to: "/products/category/fan-projection-lights" },
-  { label: "Wall window lights", to: "/products/category/wall-window-lights" },
-  { label: "Gobo lights", to: "/products/category/gobo-lights" },
-  { label: "Pool lights", to: "/products/category/pool-lights" },
-  { label: "Fountain lights", to: "/products/category/fountain-lights" },
-  { label: "Recessed ground lights", to: "/products/category/recessed-ground-lights" },
-  { label: "Tree highlighters", to: "/products/category/tree-highlighters" },
-  { label: "Flood lights", to: "/products/category/flood-lights" },
-  { label: "DMX controllers", to: "/products/category/dmx-controllers" },
-  { label: "Drivers", to: "/products/category/drivers" },
-];
-
-const services = [
-  { label: "Catalogues", to: "/catalogues" },
-  { label: "Downloads", to: "/downloads" },
-  { label: "Solutions", to: "/solutions" },
-  { label: "Projects", to: "/projects" },
-];
+const products = navigation.header.find((item) => item.variant === "mega")?.mobileChildren ?? [];
+const services = navigation.header.find((item) => item.variant === "dropdown")?.children ?? [];
 
 function MobileMenu({ isOpen, onClose }) {
   const [openProducts, setOpenProducts] = useState(false);
@@ -102,10 +79,6 @@ function MobileMenu({ isOpen, onClose }) {
                   </li>
                 ))}
               </ul>
-            </li>
-
-            <li>
-              <NavLink to="/downloads" onClick={onClose}>DOWNLOADS</NavLink>
             </li>
 
             <li>

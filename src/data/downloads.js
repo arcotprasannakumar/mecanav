@@ -12,7 +12,7 @@ const downloads = [
     legacyPath: "downloads/company-profile.pdf",
     legacySource: "Downloads.html",
     migrationStatus: "legacy-missing",
-    note: "Referenced by the legacy Downloads page, but the file is not present in the project.",
+    note: "Available on request from the Mecanav team.",
     accent: "blue",
   },
   {
@@ -26,7 +26,7 @@ const downloads = [
     legacyPath: "downloads/iso-9001.pdf",
     legacySource: "Downloads.html",
     migrationStatus: "legacy-missing",
-    note: "Referenced by the legacy Downloads page, but the file is not present in the project.",
+    note: "Available on request from the Mecanav team.",
     accent: "green",
   },
   {
@@ -40,7 +40,7 @@ const downloads = [
     legacyPath: "downloads/catalogue.zip",
     legacySource: "Downloads.html",
     migrationStatus: "legacy-missing",
-    note: "Referenced by the legacy Downloads page, but the archive is not present in the project.",
+    note: "Available on request from the Mecanav team.",
     accent: "amber",
   },
 ];

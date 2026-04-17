@@ -1,7 +1,7 @@
 function PageHero({ title, breadcrumbs = [], backgroundImage, overlayClassName = "bg-black/70" }) {
   return (
     <section
-      className="relative overflow-hidden px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8 lg:py-32"
+      className="relative overflow-hidden px-4 py-20 text-center sm:px-6 sm:py-24 lg:px-8 lg:py-28"
       style={
         backgroundImage
           ? {

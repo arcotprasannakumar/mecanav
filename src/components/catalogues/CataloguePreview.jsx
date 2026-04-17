@@ -1,7 +1,7 @@
 function CataloguePreview({ flipbookUrl, title }) {
   return (
-    <div className="space-y-4">
-      <div className="hidden h-[90vh] w-full overflow-hidden rounded-[12px] shadow-[0_0_25px_rgba(255,255,255,0.1)] md:block">
+    <div className="mx-auto max-w-[1180px] space-y-4">
+      <div className="hidden h-[82vh] w-full overflow-hidden rounded-[12px] shadow-[0_0_25px_rgba(255,255,255,0.1)] md:block">
         <iframe
           title={`${title} preview`}
           src={flipbookUrl}
@@ -12,8 +12,7 @@ function CataloguePreview({ flipbookUrl, title }) {
 
       <div className="rounded-[12px] border border-white/10 bg-white/5 p-5 text-left text-white md:hidden">
         <p className="text-sm leading-7 text-white/70">
-          The legacy catalogue pages redirected mobile users to the external flipbook view.
-          This React migration keeps that intent explicit with a direct preview button.
+          For the best mobile experience, open this catalogue in the full-screen flipbook viewer.
         </p>
         <a
           href={flipbookUrl}

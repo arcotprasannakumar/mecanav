@@ -20,7 +20,7 @@ function HomeLegacyCataloguesSection() {
 
       <div className="bookcats-wrapper show" id="bookcatsWrapper">
         {homeCatalogueCards.map((item) => (
-          <Link key={item.to} to={item.to}>
+          <Link key={item.to} to={item.to} className="bookcats-link">
             <div className="bookcats-item">
               <img src={item.image} alt={item.alt} />
             </div>

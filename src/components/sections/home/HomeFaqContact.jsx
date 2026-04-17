@@ -23,7 +23,7 @@ const faqs = [
   {
     question: "What warranty do you provide?",
     answer:
-      "Warranty depends on the selected fixture and control components. Product-level details will be migrated more precisely in the later page phases.",
+      "Warranty depends on the selected fixture and control components. Our team can confirm the right coverage for your selected product range.",
   },
 ];
 

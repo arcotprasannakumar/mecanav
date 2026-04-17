@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DownloadCard from "../components/downloads/DownloadCard";
-import HomeProductsCarousel from "../components/sections/home/HomeProductsCarousel";
+import HomeLegacyPartnersSection from "../components/sections/home/HomeLegacyPartnersSection";
 import downloads from "../data/downloads";
 import PageMeta from "../components/ui/PageMeta";
 import StatusPanel from "../components/ui/StatusPanel";
@@ -24,9 +24,9 @@ function DownloadsPage() {
     <section className="bg-[#f9fafb] text-black">
       <PageMeta
         title="Downloads"
-        description="Browse legacy Mecanav download references and document availability states."
+        description="Browse Mecanav download cards and document availability states."
       />
-      <section className="px-4 py-16 sm:px-6 lg:px-8">
+      <section className="px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="mx-auto max-w-[1280px]">
           <h1 className="text-center text-4xl font-semibold text-gray-800 sm:text-5xl">Downloads</h1>
 
@@ -41,14 +41,12 @@ function DownloadsPage() {
           </div>
 
           <div className="mx-auto mt-8 max-w-3xl text-center text-sm leading-7 text-slate-600">
-            The legacy page referenced three downloadable documents from a `downloads/`
-            folder, but those files are not present in the current project. This React version
-            keeps the original card layout and clearly marks their availability state.
+            Download availability is shown on each card so visitors can quickly see which
+            documents are ready and which ones should be requested from the Mecanav team.
           </div>
         </div>
       </section>
-
-      <HomeProductsCarousel />
+      <HomeLegacyPartnersSection />
     </section>
   );
 }

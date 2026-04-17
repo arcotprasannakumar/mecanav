@@ -152,13 +152,13 @@ function AboutPage() {
   }, []);
  
   return (
-    <main className="about-page bg-black text-white">
+    <div className="about-page bg-black text-white">
       <PageMeta
         title="About"
         description="Learn about Mecanav, our lighting journey, and the core values behind our architectural lighting solutions."
       />
  
-      <section className="bg-black pt-[90px] lg:pt-[96px]">
+      <section className="bg-black">
         <div className="mx-auto w-full px-0">
           <div className="relative h-[290px] overflow-hidden sm:h-[360px] lg:h-[420px]">
             <img
@@ -366,7 +366,7 @@ function AboutPage() {
   </div>
 </section>
       <HomeLegacyPartnersSection />
-    </main>
+    </div>
   );
 }
  

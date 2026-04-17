@@ -12,6 +12,15 @@ const animationImageMap = Object.fromEntries(
   ]),
 );
 
+const controllerItems = [
+  { id: "toggle0", stateIndex: 0, icon: "🎡", label: "Ferris Wheel Lighting" },
+  { id: "toggle1", stateIndex: 1, icon: "⛲", label: "Fountain Lighting" },
+  { id: "toggle5", stateIndex: 5, icon: "🏛️", label: "Architecture Lighting" },
+  { id: "toggle4", stateIndex: 4, icon: "🏊", label: "Pool Lighting" },
+  { id: "toggle2", stateIndex: 2, icon: "🌉", label: "Bridge Lighting" },
+  { id: "toggle3", stateIndex: 3, icon: "🌳", label: "Park Lighting" },
+];
+
 function HomeLegacyControllerSection() {
   const [controllerState, setControllerState] = useState([0, 0, 0, 0, 0, 0]);
 
@@ -29,57 +38,33 @@ function HomeLegacyControllerSection() {
   return (
     <div className="legacy-controller-wrap">
       <div className="sidebar">
-        <div className="toggle-group">
-          <label htmlFor="toggle0">Ferris Wheel Lighting</label>
-          <label className="switch">
-            <input type="checkbox" id="toggle0" checked={Boolean(controllerState[0])} onChange={() => toggleController(0)} />
-            <span className="slider" />
-          </label>
-        </div>
-
-        <div className="toggle-group">
-          <label htmlFor="toggle1">Fountain Lighting</label>
-          <label className="switch">
-            <input type="checkbox" id="toggle1" checked={Boolean(controllerState[1])} onChange={() => toggleController(1)} />
-            <span className="slider" />
-          </label>
-        </div>
-
-        <div className="toggle-group">
-          <label htmlFor="toggle5">Architectural Lighting</label>
-          <label className="switch">
-            <input type="checkbox" id="toggle5" checked={Boolean(controllerState[5])} onChange={() => toggleController(5)} />
-            <span className="slider" />
-          </label>
-        </div>
-
-        <div className="toggle-group">
-          <label htmlFor="toggle4">Pool Lighting</label>
-          <label className="switch">
-            <input type="checkbox" id="toggle4" checked={Boolean(controllerState[4])} onChange={() => toggleController(4)} />
-            <span className="slider" />
-          </label>
-        </div>
-
-        <div className="toggle-group">
-          <label htmlFor="toggle2">Bridge Lighting</label>
-          <label className="switch">
-            <input type="checkbox" id="toggle2" checked={Boolean(controllerState[2])} onChange={() => toggleController(2)} />
-            <span className="slider" />
-          </label>
-        </div>
-
-        <div className="toggle-group">
-          <label htmlFor="toggle3">Park Lighting</label>
-          <label className="switch">
-            <input type="checkbox" id="toggle3" checked={Boolean(controllerState[3])} onChange={() => toggleController(3)} />
-            <span className="slider" />
-          </label>
-        </div>
+        {controllerItems.map((item) => (
+          <div className="toggle-group" key={item.id}>
+            <label htmlFor={item.id} className="toggle-label">
+              <span className="toggle-icon" aria-hidden="true">{item.icon}</span>
+              <span>{item.label}</span>
+            </label>
+            <label className="switch" aria-label={`Toggle ${item.label}`}>
+              <input
+                type="checkbox"
+                id={item.id}
+                checked={Boolean(controllerState[item.stateIndex])}
+                onChange={() => toggleController(item.stateIndex)}
+              />
+              <span className="slider" />
+            </label>
+          </div>
+        ))}
 
         <div className="control-buttons">
-          <button type="button" className="control-btn on-btn" onClick={() => setControllerState([1, 1, 1, 1, 1, 1])}>All ON</button>
-          <button type="button" className="control-btn off-btn" onClick={() => setControllerState([0, 0, 0, 0, 0, 0])}>All OFF</button>
+          <button type="button" className="control-btn on-btn" onClick={() => setControllerState([1, 1, 1, 1, 1, 1])}>
+            <span aria-hidden="true">🔆</span>
+            <span>All ON</span>
+          </button>
+          <button type="button" className="control-btn off-btn" onClick={() => setControllerState([0, 0, 0, 0, 0, 0])}>
+            <span aria-hidden="true">🌑</span>
+            <span>All OFF</span>
+          </button>
         </div>
       </div>
 

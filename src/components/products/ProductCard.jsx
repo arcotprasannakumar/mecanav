@@ -12,7 +12,7 @@ function ProductCard({ title, image, to, className = "", captionClassName = "" }
             alt={title}
             loading="lazy"
             decoding="async"
-            className="h-[260px] w-full object-cover transition duration-500 group-hover:scale-105"
+            className="h-[220px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[260px]"
           />
         </div>
         <h2

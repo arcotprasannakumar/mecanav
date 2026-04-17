@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function ProductGallery({ images, title }) {
   const [activeImage, setActiveImage] = useState(images[0]);
 
+  useEffect(() => {
+    setActiveImage(images[0] ?? null);
+  }, [images]);
+
   if (!images.length) {
     return (
-      <div className="rounded-[24px] border border-black/10 bg-white p-6 text-sm text-slate-500">
+      <div className="rounded-[24px] border border-white/10 bg-white/5 p-6 text-sm text-white/60">
         Gallery not available for this product yet.
       </div>
     );
@@ -13,7 +17,7 @@ function ProductGallery({ images, title }) {
 
   return (
     <div className="space-y-5">
-      <div className="overflow-hidden rounded-[26px] border border-black/10 bg-white">
+      <div className="overflow-hidden rounded-[26px] border border-white/10 bg-[#050505]">
         <img
           src={activeImage}
           alt={title}
@@ -27,8 +31,8 @@ function ProductGallery({ images, title }) {
           <button
             key={image}
             type="button"
-            className={`overflow-hidden rounded-[18px] border bg-white transition ${
-              activeImage === image ? "border-black/30" : "border-black/10"
+            className={`overflow-hidden rounded-[18px] border bg-white/5 transition ${
+              activeImage === image ? "border-white/60" : "border-white/10 hover:border-white/30"
             }`}
             onClick={() => setActiveImage(image)}
           >

@@ -11,8 +11,8 @@ function ApplicationDetailPage() {
  
   if (!application) {
     return (
-      <section className="bg-black text-white">
-        <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8">
+      <section className="bg-black px-4 py-12 text-white sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
           <StatusPanel
             title="Application not found"
             message="The requested application slug is not mapped yet."
@@ -25,7 +25,7 @@ function ApplicationDetailPage() {
   }
  
   return (
-    <section className="bg-black pt-[110px] text-white lg:pt-[130px]">
+    <section className="bg-black text-white">
       <PageMeta
         title={application.title}
         description={application.overview || application.summary || application.title}
@@ -60,7 +60,7 @@ function ApplicationDetailPage() {
  
           <p className="mx-auto mt-4 max-w-[760px] text-[14px] leading-8 text-white/65 sm:text-[15px]">
             {application.overview ||
-              "This application is available in the applications hub, and full detail content will be added soon."}
+              "Explore this lighting application as part of the Mecanav solution range. Contact our team for project-specific design guidance and product recommendations."}
           </p>
         </div>
       </div>

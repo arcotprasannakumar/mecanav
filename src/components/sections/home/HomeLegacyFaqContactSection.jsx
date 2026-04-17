@@ -5,7 +5,10 @@ import contactBg from "../../../assets/images/banners/contactbg.png";
 import modelAsset from "../../../assets/media/113133.glb";
 
 const faqItems = [
-  { question: "What is your delivery timeline?", answer: "Our standard delivery time is 5-7" },
+  {
+    question: "What is your delivery timeline?",
+    answer: "Our standard delivery time is 5-7 working days, depending on product availability and project scope.",
+  },
   {
     question: "Do you offer installation services?",
     answer: "Yes, we provide installation services through our certified partners in select cities.",
@@ -35,7 +38,14 @@ function HomeLegacyFaqContactSection() {
               <div className="accordion-faq">
                 {faqItems.map((item, index) => (
                   <div key={item.question} className={`faq-box faq-bg${activeFaq === index ? " active" : ""}`}>
-                    <h5 className="faq-question" onClick={() => setActiveFaq(index)}>{item.question}</h5>
+                    <button
+                      type="button"
+                      className="faq-question"
+                      onClick={() => setActiveFaq((current) => (current === index ? null : index))}
+                      aria-expanded={activeFaq === index}
+                    >
+                      {item.question}
+                    </button>
                     <div className="faq-answer">
                       <p>{item.answer}</p>
                     </div>
