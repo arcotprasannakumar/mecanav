@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import HomeLegacyPartnersSection from "../components/sections/home/HomeLegacyPartnersSection";
 import applications from "../data/applications";
 import PageMeta from "../components/ui/PageMeta";
  
@@ -46,13 +45,13 @@ function ApplicationsPage() {
   };
  
   return (
-    <section className="bg-black text-white">
+    <section className="bg-black pt-[120px] text-white lg:pt-[140px]">
       <PageMeta
         title="Applications"
         description="Explore Mecanav lighting applications across bridges, parks, facades, stages, and public environments."
       />
  
-      <div className="px-5 py-8 sm:px-8 lg:px-10">
+      <div className="px-5 pb-6 pt-8 sm:px-8 lg:px-10">
         <h1 className="text-left text-[32px] font-light leading-none text-white sm:text-[48px] lg:text-[64px]">
           Applications
         </h1>
@@ -60,7 +59,7 @@ function ApplicationsPage() {
  
       <div className="mx-auto max-w-[1700px] bg-[#f3efef] px-4 pb-16 pt-8 sm:px-6 lg:px-7 lg:pb-24 lg:pt-[40px]">
         <div className="grid gap-5 lg:grid-cols-[340px_minmax(0,1fr)] lg:gap-[60px]">
-          <aside className="lg:sticky lg:top-[calc(var(--site-header-height)+24px)] lg:self-start">
+          <aside className="lg:sticky lg:top-[120px] lg:self-start">
             <div className="overflow-hidden bg-black">
               <ul className="flex overflow-x-auto whitespace-nowrap lg:block lg:overflow-visible">
                 {applications.map((application) => (
@@ -98,7 +97,7 @@ function ApplicationsPage() {
  
                 <Link
   to={`/applications/${application.slug}`}
-  className="group relative block w-full max-w-[980px] overflow-hidden"
+  className="group relative block w-[90%] overflow-hidden"
 >
   {/* Fixed ratio container */}
   <div className="relative w-full aspect-[16/9] bg-black">
@@ -124,7 +123,6 @@ function ApplicationsPage() {
           </div>
         </div>
       </div>
-      <HomeLegacyPartnersSection />
     </section>
   );
 }

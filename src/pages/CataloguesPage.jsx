@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import catalogues from "../data/catalogues";
 import CatalogueCard from "../components/catalogues/CatalogueCard";
 import CatalogueFormGate from "../components/catalogues/CatalogueFormGate";
-import HomeLegacyPartnersSection from "../components/sections/home/HomeLegacyPartnersSection";
+// import HomeLegacyPartnersSection from "../components/sections/home/HomeLegacyPartnersSection";
 import PageMeta from "../components/ui/PageMeta";
 import { triggerFileDownload } from "../utils/fileDownload";
 
@@ -36,8 +36,10 @@ function CataloguesPage() {
       />
       <div className="mx-auto max-w-[1400px]">
         <div className="px-2 py-5 text-center">
-          <h1 className="font-['Poppins',sans-serif] font-bold tracking-[0.08em] text-[#010101] sm:text-4xl">
-            OUR CATALOGUES
+          <h1 className="font-['Poppins',sans-serif] font-bold tracking-[0.08em] text-[#010101] sm:text-3xl">
+            <span className="catalogues-typing-heading" style={{ "--typing-characters": 14 }}>
+              OUR CATALOGUES
+            </span>
           </h1>
         </div>
 
@@ -61,7 +63,7 @@ function CataloguesPage() {
         unavailableMessage={unavailableMessage}
         fields={selectedCatalogue?.formFields}
       />
-      <HomeLegacyPartnersSection />
+      {/* <HomeLegacyPartnersSection /> */}
     </section>
   );
 }
