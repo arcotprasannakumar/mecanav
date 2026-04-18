@@ -222,6 +222,10 @@ const poolLightsImages = {
   rgbww220vPixel: getAssetUrl("Final-Products/Product spec imgs/pool lights/pool6.webp"),
 };
 
+
+
+
+
 const fountainBase = "Final-Products/Product spec imgs/fountain lights";
 
 const fountainLightsImages = {
