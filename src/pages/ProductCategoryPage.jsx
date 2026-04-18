@@ -11,24 +11,30 @@ function ProductCategoryPage() {
   const { slug } = useParams();
   const category = productCategoryMap[slug];
   const categoryProducts = slug ? productsByCategory(slug) : [];
-  const productsBySlug = Object.fromEntries(categoryProducts.map((product) => [product.slug, product]));
+  const productsBySlug = Object.fromEntries(
+    categoryProducts.map((product) => [product.slug, product]),
+  );
+
   const sourceItems = category?.sidebarItems?.length
     ? category.sidebarItems
     : categoryProducts.map((product) => ({
         slug: product.slug,
         label: product.title,
         to: `/products/${product.slug}`,
+        image: product.cardImage,
       }));
+
   const displayProducts = sourceItems.map((item) => {
     const mappedProduct = productsBySlug[item.slug];
 
     return {
       slug: item.slug,
       title: mappedProduct?.title ?? item.label,
-      image: mappedProduct?.cardImage ?? category.image,
+      image: mappedProduct?.cardImage ?? item.image ?? category.image,
       to: item.to ?? `/products/${item.slug}`,
     };
   });
+
   const productCounts = Object.fromEntries(
     productCategories.map((item) => [
       item.slug,
@@ -51,16 +57,15 @@ function ProductCategoryPage() {
 
   return (
     <section className="bg-[#fffafa] text-black">
-      <PageMeta
-        title={category.title}
-        description={category.description}
-      />
+      <PageMeta title={category.title} description={category.description} />
+
       <div className="mx-auto flex min-h-[calc(100vh-140px)] w-full max-w-[1600px] flex-col lg:flex-row">
         <ProductSidebar
           categories={productCategories}
           activeCategorySlug={category.slug}
           productCounts={productCounts}
         />
+
         <div className="flex-1 bg-[#fffafa] p-4 sm:p-6 lg:p-10">
           {displayProducts.length ? (
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
@@ -82,6 +87,7 @@ function ProductCategoryPage() {
           )}
         </div>
       </div>
+
       <HomeLegacyPartnersSection />
     </section>
   );
